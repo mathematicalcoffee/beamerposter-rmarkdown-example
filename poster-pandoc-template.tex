@@ -4,9 +4,6 @@
 % August 2009
 % http://www.nathanieljohnston.com/2009/08/latex-poster-template/
 % further modified by Amy (Sep 2016): 3 columns, sans serif font.
-% TODOS
-% - fonts look funny.
-% - why the scale=1.24?
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \documentclass[final]{beamer}
@@ -18,7 +15,6 @@
 
 %-----------------------------------------------------------
 % Lengths: the calc package is your friend here.
-% @TODO - a seperator width?
 %-----------------------------------------------------------
 
 \newlength{\colwid}
@@ -26,7 +22,6 @@
 \setlength{\topmargin}{-0.5in}
 
 % --- further styles!
-% @TODO pass this through to the conf style. or fold beamerthemeconfposter.sty into this.
 \setbeamertemplate{blocks}$if(beamerconfig.blocks.rounded)$[rounded]$if(beamerconfig.blocks.shadow)$[shadow=true]$endif$$endif$
 \usetheme{confposter} % essentially a preamble with many colours, packages
 \usepackage{exscale}

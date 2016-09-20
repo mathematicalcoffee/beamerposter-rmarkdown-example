@@ -1,13 +1,10 @@
 ---
 # NOTE: although this is a rmd, markdown won't work. You should write it in TeX.
 # (if I make a Rnw then it won't use pandoc so the YAML header is ignored)
-# @TODO adjust font sizes
-# @TODO serif font
 title: Unnecessarily complicated research title
 date: "5.0.2 | `r format(Sys.time(), format='%Y-%m-%d %H:%M:%S %z')`"
 author:
     # order: student, principal, affiliates.
-    # @TODO toggle to put the role of each author.
     - name: The Student
       affiliation: [1, 2]
     - name: The Slavedriver
@@ -19,7 +16,6 @@ affiliation:
       name: Department of studying and research, University of PhD
     - key: 2
       name: Institute for grant money
-# @TODO logos
 # -- rmarkdown stuff -- #
 output:
   pdf_document:
@@ -38,9 +34,6 @@ beamerconfig:
         shadow: true
 papersize: a0 # the default.
 columnwidth: '0.3\paperwidth' # the default is 0.3\textwidth and you get \colwid set to it.
-# @todo abstract/summary folded in to template or no?
-# @todo abstract-style block? you can set its width and it is centred by default.
-# http://tex.stackexchange.com/questions/12550/changing-default-width-of-blocks-in-beamer
 ---
 \DefineShortVerb{\`}
 <!--
@@ -81,7 +74,6 @@ columnwidth: '0.3\paperwidth' # the default is 0.3\textwidth and you get \colwid
         \item R package `knitr`
         \item pandoc
       \end{itemize}
-      % @TODO insert references
       
       I've only tested this compiling from Rstudio.
       You can set authors and affiliations in the YAML metadata, along with limited beamer styling (block rounded corners and so on).
@@ -126,6 +118,20 @@ columnwidth: '0.3\paperwidth' # the default is 0.3\textwidth and you get \colwid
           The \emph{fg} colour sets the text colour and \emph{bg} sets the background colour.
           For the normal blocks it makes no sense to use a background colour other than white. You \emph{can} change it, but it will look weird!
         \end{block} % block colours
+        
+		    \begin{block}{Todo}
+		    \begin{itemize}
+  		    \item the font looks funny.
+  		    \item explicit control over separator width?
+  		    \item more control over font size
+  		    \item spacing between institutions seems too large
+  		    \item logos
+  		    \item bibliography without explicit `\bibitem`, ie integrate biblatex?
+  		    \item more spacing between blocks
+  		    \item easy styling and so on.
+		    \end{itemize}
+		    \end{block} % todo
+		    
         \begin{block}{References}
           Some references and a graphic to show you how it's done:
 
