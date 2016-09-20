@@ -5,6 +5,8 @@ Based off the [Computational Physics and Biophysics Group, Jacobs University tem
 At the moment it consists of an example Rmd file, a pandoc template for beamer, and the beamer style file.
 It compiles from R, but doesn't actually support the knitr yet (oops).
 
+The idea is that it will be much more standalone - remove the custom colour definitions, custom boxes (well check - they might look worse) and basically everything except the custom headline? (Maybe I don't even need that?) - you could just use your favourite beamer theme, right? The main thing I need to do is mod the font sizes. So perhaps reduce the number of files needed?
+
 ## YAML frontmatter
 
 ### Title, authors, institutions

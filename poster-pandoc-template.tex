@@ -23,6 +23,7 @@
 
 % --- further styles!
 \setbeamertemplate{blocks}$if(beamerconfig.blocks.rounded)$[rounded]$if(beamerconfig.blocks.shadow)$[shadow=true]$endif$$endif$
+\usetheme{Berkeley} % for the colours
 \usetheme{confposter} % essentially a preamble with many colours, packages
 \usepackage{exscale}
 
@@ -44,11 +45,11 @@
 %-----------------------------------------------------------
 % Define colours (see beamerthemeconfposter.sty to change these colour definitions)
 %-----------------------------------------------------------
-
-\setbeamercolor{block title}{fg=ngreen,bg=white}
-\setbeamercolor{block body}{fg=black,bg=white}
-\setbeamercolor{block alerted title}{fg=white,bg=dblue!70}
-\setbeamercolor{block alerted body}{fg=black,bg=dblue!10}
+%@@
+%\setbeamercolor{block title}{fg=ngreen,bg=white}
+$for(beamerconfig.colours)$
+\setbeamercolor{$beamerconfig.colours.name$}{$beamerconfig.colours.style$}
+$endfor$
 
 %-----------------------------------------------------------
 % User-included preamble

@@ -4,3 +4,4 @@ example.pdf
 *.aux
 *.log
 *.out
+.Rproj.user

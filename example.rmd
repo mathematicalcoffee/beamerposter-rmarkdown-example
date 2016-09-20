@@ -1,8 +1,14 @@
 ---
 # NOTE: although this is a rmd, markdown won't work. You should write it in TeX.
 # (if I make a Rnw then it won't use pandoc so the YAML header is ignored)
+# Hmm. I need knitr output to be in TeX. But if I save as Rnw it goes
+# knitr {rtex -> tex} then pdflatex {tex -> pdf} without going through pandoc
+#  [which is handy for the template]
+#
+# I guess what I want is
+# knitr {rtex -> tex} then pandoc {tex -> tex; purely to insert the template} then pdflatex.
 title: Unnecessarily complicated research title
-date: "5.0.2 | `r format(Sys.time(), format='%Y-%m-%d %H:%M:%S %z')`"
+date: "`r format(Sys.time(), format='%Y-%m-%d %H:%M:%S %z')`"
 author:
     # order: student, principal, affiliates.
     - name: The Student
@@ -32,6 +38,14 @@ beamerconfig:
     blocks: # default rounded, no shadow.
         rounded: true
         shadow: true
+    colours:
+    # (block|alerted|example) (body|title)
+      - name: block body
+        style: bg=white # ,fg=blue
+      # the horizontal rule between header and poster #@todo use
+      #  one of the theme colours.
+      - name: cboxb
+        style: bg=black
 papersize: a0 # the default.
 columnwidth: '0.3\paperwidth' # the default is 0.3\textwidth and you get \colwid set to it.
 ---
@@ -48,12 +62,12 @@ columnwidth: '0.3\paperwidth' # the default is 0.3\textwidth and you get \colwid
 -->
 \begin{center}%
   \begin{minipage}{.7\textwidth}%
-    \begin{alertblock}{Summary}%
+    \begin{exampleblock}{Summary}%
     Here is a barebones document for an A0 poster.
     It was based off http://www.nathanieljohnston.com/2009/08/latex-poster-template/ but has been modified to work as an R Markdown file to be compiled with knitr (rmd to md) and then pandoc (md to tex) and then latex (tex to pdf).
     
     This comes with its downsides (notably: that you can't use markdown within the blocks!!), but meh.
-    \end{alertblock}%
+    \end{exampleblock}%
   \end{minipage}%
 \end{center}
 \vskip1in
@@ -100,7 +114,6 @@ columnwidth: '0.3\paperwidth' # the default is 0.3\textwidth and you get \colwid
       \end{verbatim}
       
       You get `\colwid` for free, and using the `calc` package you can get multiples of it.
-      TODO - seperator space?
     \end{block}
     
     \begin{columns}[t,totalwidth=2.1\colwid]	% split up that two-column-wide column
@@ -110,10 +123,8 @@ columnwidth: '0.3\paperwidth' # the default is 0.3\textwidth and you get \colwid
         \begin{block}{Block Colours}
           For the standard blocks there are two colours; one for the title and one for the block body:\\
           \begin{semiverbatim}
-            {\color{red}\\setbeamercolor}\{block title\}\newline \{fg=red,bg=white\}
-          \end{semiverbatim}
-          \begin{semiverbatim}
-            {\color{red}\\setbeamercolor}\{block  body\}\newline \{fg=black,bg=white\}
+            {\color{red}\\setbeamercolor}\{block title\}\{fg=red,bg=white\}
+            {\color{red}\\setbeamercolor}\{block  body\}\{fg=black,bg=white\}
           \end{semiverbatim}
           The \emph{fg} colour sets the text colour and \emph{bg} sets the background colour.
           For the normal blocks it makes no sense to use a background colour other than white. You \emph{can} change it, but it will look weird!
@@ -121,14 +132,17 @@ columnwidth: '0.3\paperwidth' # the default is 0.3\textwidth and you get \colwid
         
 		    \begin{block}{Todo}
 		    \begin{itemize}
+  		    \item the only crucial thing in the sty is the headline definition, right? Can that be moved to the poster-pandoc.sty?
+  		    \item knitr...
   		    \item the font looks funny.
-  		    \item explicit control over separator width?
+  		    \item theming: user puts in a theme e.g. warsaw first for colours if they like
   		    \item more control over font size
   		    \item spacing between institutions seems too large
   		    \item logos
   		    \item bibliography without explicit `\bibitem`, ie integrate biblatex?
-  		    \item more spacing between blocks
+  		    \item more spacing between blocks//standard spacing
   		    \item easy styling and so on.
+  		    \item [WONT] explicit control over separator width?
 		    \end{itemize}
 		    \end{block} % todo
 		    
