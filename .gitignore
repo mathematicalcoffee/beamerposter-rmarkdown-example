@@ -1,0 +1,6 @@
+.Rproj.user/
+example.tex
+example.pdf
+*.aux
+*.log
+*.out
