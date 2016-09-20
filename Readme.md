@@ -2,6 +2,9 @@
 
 Based off the [Computational Physics and Biophysics Group, Jacobs University template with modifications by Nathaniel Johnston and Vel Gayevskiy](https://www.overleaf.com/latex/templates/landscape-beamer-poster-template/vjpmsxxdvtqk).
 
+At the moment it consists of an example Rmd file, a pandoc template for beamer, and the beamer style file.
+It compiles from R, but doesn't actually support the knitr yet (oops).
+
 ## YAML frontmatter
 
 ### Title, authors, institutions
