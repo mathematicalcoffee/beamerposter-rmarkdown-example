@@ -1,0 +1,155 @@
+---
+# NOTE: although this is a rmd, markdown won't work. You should write it in TeX.
+# (if I make a Rnw then it won't use pandoc so the YAML header is ignored)
+# @TODO adjust font sizes
+# @TODO serif font
+title: Unnecessarily complicated research title
+date: "5.0.2 | `r format(Sys.time(), format='%Y-%m-%d %H:%M:%S %z')`"
+author:
+    # order: student, principal, affiliates.
+    # @TODO toggle to put the role of each author.
+    - name: The Student
+      affiliation: [1, 2]
+    - name: The Slavedriver
+      affiliation: 1
+    - name: Secondary Slavedriver
+      affiliation: 2
+affiliation:
+    - key: 1
+      name: Department of studying and research, University of PhD
+    - key: 2
+      name: Institute for grant money
+# @TODO logos
+# -- rmarkdown stuff -- #
+output:
+  pdf_document:
+    template: "poster-pandoc-template.tex"
+    keep_tex: yes
+# -- preamble. if it's a lot use include-in-header and give a file instead -- #
+header-includes:
+    # examples
+    - '\usepackage{mwe}'
+    - '\usepackage{fancyvrb}'  # you get hyperref already
+    - '\graphicspath{{images/}}'  # you get hyperref already
+# -- template config -- #
+beamerconfig:
+    blocks: # default rounded, no shadow.
+        rounded: true
+        shadow: true
+papersize: a0 # the default.
+columnwidth: '0.3\paperwidth' # the default is 0.3\textwidth and you get \colwid set to it.
+# @todo abstract/summary folded in to template or no?
+# @todo abstract-style block? you can set its width and it is centred by default.
+# http://tex.stackexchange.com/questions/12550/changing-default-width-of-blocks-in-beamer
+---
+\DefineShortVerb{\`}
+<!--
+%-----------------------------------------------------------
+% When including a figure in your poster, be sure that the commands are typed in the following order:
+% \begin{figure}
+% \includegraphics[...]{...}
+% \caption{...}
+% \end{figure}
+% That is, put the \caption after the \includegraphics
+%-----------------------------------------------------------
+-->
+\begin{center}%
+  \begin{minipage}{.7\textwidth}%
+    \begin{alertblock}{Summary}%
+    Here is a barebones document for an A0 poster.
+    It was based off http://www.nathanieljohnston.com/2009/08/latex-poster-template/ but has been modified to work as an R Markdown file to be compiled with knitr (rmd to md) and then pandoc (md to tex) and then latex (tex to pdf).
+    
+    This comes with its downsides (notably: that you can't use markdown within the blocks!!), but meh.
+    \end{alertblock}%
+  \end{minipage}%
+\end{center}
+\vskip1in
+\begin{columns}[t] % align top
+  \begin{column}{\colwid}
+    \begin{block}{The Setup}
+      Required files:
+      
+      \begin{itemize}
+        \item `poste.rmd`, this example R Markdown file.
+        \item `poster-pandoc-template.tex`, the pandoc template for the poster.
+        \item `beamerthemeconfposter.sty`, the beamer style file (I \emph{think} you may be able to substitute your own, but I used the one from \url{https://www.overleaf.com/latex/templates/landscape-beamer-poster-template/vjpmsxxdvtqk}
+      \end{itemize}
+     
+      Also: 
+      \begin{itemize}
+        \item LaTeX packages `latexbeamer`, `pgf` (Tikz), `beamerposter`
+        \item R package `knitr`
+        \item pandoc
+      \end{itemize}
+      % @TODO insert references
+      
+      I've only tested this compiling from Rstudio.
+      You can set authors and affiliations in the YAML metadata, along with limited beamer styling (block rounded corners and so on).
+          
+    \end{block}
+    \vskip2ex
+    \begin{alertblock}{An Alert Block}
+      The alert block environment looks like this. It also has justified text, but it has a border and a light background to make it stand out. You can create one like so:
+      \begin{semiverbatim}
+        {\color{red}\\begin}\{{\color{blue}alertblock}\}\{Title\}\newline
+        \hskip1ex.......\newline
+        {\color{red}\\end}\{{\color{blue}alertblock}\}
+      \end{semiverbatim}
+    \end{alertblock}
+  \end{column}
+  % column spanning two columns.
+  \begin{column}{2\colwid}
+    \begin{block}{Altering Column Spans}
+      You can make columns that span multiple other columns relatively easily. Lengths are defined in the template that make columns look normal-ish if you want to use a three-column layout like this poster. If you want to use a different number of columns, you can specify the base column width in the YAML preamble.
+
+      In particular, in the YAML:
+      \begin{verbatim}
+        columnwidth: '0.3\paperwidth'
+      \end{verbatim}
+      
+      You get `\colwid` for free, and using the `calc` package you can get multiples of it.
+      TODO - seperator space?
+    \end{block}
+    
+    \begin{columns}[t,totalwidth=2.1\colwid]	% split up that two-column-wide column
+      \begin{column}{\colwid}
+        \setbeamercolor{block title}{fg=red,bg=white}%frame color
+        \setbeamercolor{block body}{fg=black,bg=white}%body color
+        \begin{block}{Block Colours}
+          For the standard blocks there are two colours; one for the title and one for the block body:\\
+          \begin{semiverbatim}
+            {\color{red}\\setbeamercolor}\{block title\}\newline \{fg=red,bg=white\}
+          \end{semiverbatim}
+          \begin{semiverbatim}
+            {\color{red}\\setbeamercolor}\{block  body\}\newline \{fg=black,bg=white\}
+          \end{semiverbatim}
+          The \emph{fg} colour sets the text colour and \emph{bg} sets the background colour.
+          For the normal blocks it makes no sense to use a background colour other than white. You \emph{can} change it, but it will look weird!
+        \end{block} % block colours
+        \begin{block}{References}
+          Some references and a graphic to show you how it's done:
+
+		      \small{\begin{thebibliography}{99}%@TODO incorporate with a bibtex
+		        \bibitem{KLPL06} D.~W. Kribs, R. Laflamme, D. Poulin, M. Lesosky, Quantum Inf. \& Comp. \textbf{6} (2006), 383-399.
+		        \bibitem{zanardi97} P. Zanardi, M. Rasetti, Phys. Rev. Lett. \textbf{79},  3306 (1997).
+		      \end{thebibliography}}
+		    \end{block} % references
+      \end{column}
+      \begin{column}{\colwid}
+        \begin{block}{Demo}
+          Some maths:
+          \begin{equation*}
+          \sum_{i=1}^{\infty} \frac{1}{i}\text{ does not converge.}
+          \end{equation*}
+          
+          A figure:
+			    \begin{figure}
+            \includegraphics[width=\colwid]{example-image}
+            \caption{A caption.}
+			    \end{figure}
+        \end{block} % demo
+      \end{column}
+    \end{columns}
+    \vskip2.5ex
+  \end{column}
+ \end{columns}

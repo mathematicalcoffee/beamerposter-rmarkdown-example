@@ -1,0 +1,101 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% LaTeX poster template
+% Created by Nathaniel Johnston
+% August 2009
+% http://www.nathanieljohnston.com/2009/08/latex-poster-template/
+% further modified by Amy (Sep 2016): 3 columns, sans serif font.
+% TODOS
+% - fonts look funny.
+% - why the scale=1.24?
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\documentclass[final]{beamer}
+\usepackage[size=$if(papersize)$$papersize$$else$a0$endif$]{beamerposter}
+\usepackage{graphicx}
+\usepackage{hyperref}
+\usepackage{calc} % width calculations
+
+
+%-----------------------------------------------------------
+% Lengths: the calc package is your friend here.
+% @TODO - a seperator width?
+%-----------------------------------------------------------
+
+\newlength{\colwid}
+\setlength{\colwid}{$if(columnwidth)$$columnwidth$$else$0.3\paperwidth$endif$}
+\setlength{\topmargin}{-0.5in}
+
+% --- further styles!
+% @TODO pass this through to the conf style. or fold beamerthemeconfposter.sty into this.
+\setbeamertemplate{blocks}$if(beamerconfig.blocks.rounded)$[rounded]$if(beamerconfig.blocks.shadow)$[shadow=true]$endif$$endif$
+\usetheme{confposter} % essentially a preamble with many colours, packages
+\usepackage{exscale}
+
+%-----------------------------------------------------------
+% The next part fixes a problem with figure numbering. Thanks Nishan!
+% When including a figure in your poster, be sure that the commands are typed in the following order:
+% \begin{figure}
+% \includegraphics[...]{...}
+% \caption{...}
+% \end{figure}
+% That is, put the \caption after the \includegraphics
+%-----------------------------------------------------------
+
+\usecaptiontemplate{
+\small
+\structure{\insertcaptionname~\insertcaptionnumber:}
+\insertcaption}
+
+%-----------------------------------------------------------
+% Define colours (see beamerthemeconfposter.sty to change these colour definitions)
+%-----------------------------------------------------------
+
+\setbeamercolor{block title}{fg=ngreen,bg=white}
+\setbeamercolor{block body}{fg=black,bg=white}
+\setbeamercolor{block alerted title}{fg=white,bg=dblue!70}
+\setbeamercolor{block alerted body}{fg=black,bg=dblue!10}
+
+%-----------------------------------------------------------
+% User-included preamble
+%-----------------------------------------------------------
+$for(header-includes)$
+$header-includes$
+$endfor$
+
+%-----------------------------------------------------------
+% Name and authors of poster/paper/research
+%-----------------------------------------------------------
+
+\title{$title$}
+\author{%
+$for(author)$
+  $author.name$$for(author.affiliation)$\inst{$author.affiliation$}$sep$\,$endfor$%
+$sep$\and%
+$endfor$
+}
+\institute{%
+$for(affiliation)$
+\inst{$affiliation.key$}
+  $for(affiliation.name)$
+    $affiliation.name$$sep$\\
+  $endfor$
+  $sep$\and%
+$endfor$
+}
+%-----------------------------------------------------------
+% Start the poster itself
+%-----------------------------------------------------------
+
+\begin{document}
+$for(include-before)$
+$include-before$
+
+$endfor$
+\begin{frame}[t,fragile]
+$body$
+\end{frame}
+$for(include-after)$
+$include-after$
+
+$endfor$
+\end{document}
