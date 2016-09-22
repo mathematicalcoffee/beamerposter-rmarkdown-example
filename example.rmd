@@ -32,7 +32,6 @@ header-includes:
     # examples
     - '\usepackage{mwe}'
     - '\usepackage{fancyvrb}'  # you get hyperref already
-    - '\graphicspath{{images/}}'  # you get hyperref already
 # -- template config -- #
 beamerconfig:
     blocks: # default rounded, no shadow.
@@ -47,6 +46,7 @@ beamerconfig:
       - name: cboxb
         style: bg=black
 papersize: a0 # the default.
+graphicspath: images/ #  default none
 columnwidth: '0.3\paperwidth' # the default is 0.3\textwidth and you get \colwid set to it.
 ---
 \DefineShortVerb{\`}
@@ -132,6 +132,7 @@ columnwidth: '0.3\paperwidth' # the default is 0.3\textwidth and you get \colwid
         
 		    \begin{block}{Todo}
 		    \begin{itemize}
+  		    \item block* a plain block (title no shading?)
   		    \item the only crucial thing in the sty is the headline definition, right? Can that be moved to the poster-pandoc.sty?
   		    \item knitr...
   		    \item the font looks funny.
