@@ -52,6 +52,19 @@ $for(beamerconfig.colours)$
 $endfor$
 
 %-----------------------------------------------------------
+% Pandoc stuff
+%-----------------------------------------------------------
+% hack for markdown-in-blocks
+\let\Begin\begin
+\let\End\end
+% the above doesn't work if there are optional arguments. so
+% then you have to [e.g.] \nopandoc{\begin{figure}[t]}
+\newcommand{\nopandoc}[1]{#1}
+% it uses tightlist in itemize (if you don't like it just try
+%  e.g. \def\tightlist{}
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+%-----------------------------------------------------------
 % User-included preamble
 %-----------------------------------------------------------
 $for(header-includes)$

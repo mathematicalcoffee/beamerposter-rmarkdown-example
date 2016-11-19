@@ -47,3 +47,34 @@ columnwidth: '0.3\paperwidth' # default is 0.3\paperwidth
 
 The macro `\colwid` is available for use within the template, and the `calc` package allows for further specifications like `2\colwid`.
 It is set to `0.3\paperwidth` by default but you can override it in the YAML frontmatter if you like.
+
+## Markdown
+
+One problem is that when writing beamer, a lot of `\begin{}` and `\end{}` are used (block, column, ...) and pandoc will not parse text inside a block. Since the entire poster is usually in columns and blocks, this means you end up writing the whole poster in latex anyway, defeating the purpose of using pandoc. To get around this, we use the workaround in [jgm/pandoc #2453](https://github.com/jgm/pandoc/issues/2453#issuecomment-219233316) and provide aliases `\Begin{}` and `\End{}`, and the contents of these *will* be parsed as markdown/pandoc.
+
+However if the begin/end block has an optional argument (e.g. `\Begin{figure}[t]`, this will not be properly treated; rather, the trailing `[t]` will be treated as literal text by Pandoc. In cases like these you need to use `\nopandoc` (which is just the identity command) as in `\nopandoc{\begin{figure}[t]}`, which (surprisingly) works.
+
+A number of other unpleasant side-effects of parsing within LaTeX are that if you have comments using `%`, they'll be parsed as literal percent signs by pandoc; pandoc recognises the HTML-style comments only.
+
+And also if you indent your latex/text for readability within blocks, if it's indented more than 4 spaces it'll probably get treated as a code block. So unindent it :/
+
+## Troubleshooting
+
+### Font problems (mathkerncmssi)
+
+```
+!pdfTeX error: pdflatex (file mathkerncmssi17): Font mathkerncmssi17 at 864 not
+ found
+ ==> Fatal error occurred, no output PDF file produced!
+
+kpathsea: Running mktexpk --mfmode / --bdpi 600 --mag 1+264/600 --dpi 864 mathkerncmssi17
+mktexpk: don't know how to create bitmap font for mathkerncmssi17.
+mktexpk: perhaps mathkerncmssi17 is missing from the map file.
+kpathsea: Appending font creation commands to missfont.log.
+```
+
+This worked:
+
+```
+./updmap-sys --enable Map sansmathaccent.map
+```
