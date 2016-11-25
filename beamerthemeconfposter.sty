@@ -16,8 +16,8 @@
 \RequirePackage{textcomp}
 \RequirePackage{amsmath,amssymb}
 \usepackage{exscale}
-\newcommand{\makeruleinbox}{{\usebeamercolor[bg]{block alerted title}\centering\hspace*{-0.7cm}\rule{\inboxrule}{0.5cm}}}
 \usepackage{ragged2e}
+\usepackage{changepage}
 
 % Spacing before and inside list environments to add white space before lists and between items inside lists
 \makeatletter
@@ -35,16 +35,14 @@
 
 % set the fonts
 \setbeamerfont{section in head/foot}{series=\bfseries}
-\setbeamerfont{block title}{series=\bfseries}
-\setbeamerfont{block alerted title}{series=\bfseries}
-\setbeamerfont{frametitle}{series=\bfseries}
-\setbeamerfont{frametitle}{size=\Large}
-%\setbeamerfont{block body}{series=\rmfamily} % if you want serif I suppose you can do this?
+\setbeamerfont{block title}{series=\bfseries,size=\huge} % headings.
+\setbeamerfont{frametitle}{series=\bfseries,size=\HUGE} % seems to have no effect. Well, I don't have a frametitle
 
 % set some beamer theme options
 \setbeamertemplate{title page}[default][colsep=-4bp,rounded=true]
 \setbeamertemplate{sections/subsections in toc}[square]
 \setbeamertemplate{items}[circle]
+
 % no nav symbols, sidebar
 \beamertemplatenavigationsymbolsempty
 \setbeamertemplate{sidebar left}{}
@@ -55,44 +53,6 @@
 \setbeamercolor{bibliography entry author}{fg=black,bg=white}
 \setbeamercolor{bibliography item}{fg=black,bg=white}
 
-%-----------------------------------------------------------
-% Colour examples
-%-----------------------------------------------------------
-
-% \definecolor{lgreen} {RGB}{180,210,100}
-% \definecolor{dblue}  {RGB}{20,66,129}
-% \definecolor{ddblue} {RGB}{11,36,69}
-% \definecolor{lred}   {RGB}{220,0,0}
-% \definecolor{nred}   {RGB}{224,0,0}
-% \definecolor{norange}{RGB}{230,120,20}
-% \definecolor{nyellow}{RGB}{255,221,0}
-% \definecolor{ngreen} {RGB}{98,158,31}
-% \definecolor{dgreen} {RGB}{78,138,21}
-% \definecolor{nblue}  {RGB}{28,130,185}
-% \definecolor{jblue}  {RGB}{20,50,100}
-
-% examples for setting colours
-% % set the basic colors
-% \setbeamercolor{palette primary}   {fg=black,bg=white}
-% \setbeamercolor{palette secondary} {fg=black,bg=white}
-% \setbeamercolor{palette tertiary}  {bg=jblue,fg=white}
-% \setbeamercolor{palette quaternary}{fg=black,bg=white}
-% \setbeamercolor{structure}{fg=jblue}
-% \setbeamercolor{titlelike}         {bg=jblue,fg=white}
-% \setbeamercolor{frametitle}        {bg=jblue!10,fg=jblue}
-% \setbeamercolor{cboxb}{bg=blue} % the rule under the title.
-% \setbeamercolor{cboxr}{fg=black,bg=red}
-%  % set colors for itemize/enumerate
-% \setbeamercolor{item}{fg=ngreen}
-% \setbeamercolor{item projected}{fg=white,bg=ngreen}
-% %
-% % set colors for blocks
-% \setbeamercolor{block title}{fg=ngreen,bg=white}
-% \setbeamercolor{block body}{fg=black,bg=white}
-% %
-% % set colors for alerted blocks (blocks with frame)
-% \setbeamercolor{block alerted title}{fg=white,bg=jblue}
-% \setbeamercolor{block alerted body}{fg=black,bg=jblue!10}
 
 %==============================================================================
 % build the poster title
@@ -115,72 +75,24 @@
  \vspace{0.1in}
 }
 
-%% define some length variables that are used by the template
-%\newlength{\inboxwd}
-%\newlength{\iinboxwd}
-%\newlength{\inboxrule}
-%\makeatletter
-%\makeatother
-%% Block definition
-%\setbeamertemplate{block begin}
-%{
-%  \par\vskip\medskipamount
-%  \begin{beamercolorbox}[colsep*=0ex,dp={2ex},center]{block title}
-%    \vskip-0.25cm
-%    \usebeamerfont{block title}\large\insertblocktitle
-%    \begin{flushleft}
-%    \vskip-1cm
-%    \begin{tikzpicture}[remember picture,overlay]
-%      \shade [inner color=gray,outer color=white]
-%      (0,0) rectangle (\textwidth,0.3cm);
-%    \end{tikzpicture}
-%    \end{flushleft}
-%  \end{beamercolorbox}
-%  {\parskip0pt\par}
-%  \ifbeamercolorempty[bg]{block title}
-%  {}
-%  {\ifbeamercolorempty[bg]{block body}{}{\nointerlineskip\vskip-0.5pt}}
-%  \usebeamerfont{block body}
-%  \vskip-0.5cm
-%  \begin{beamercolorbox}[colsep*=0ex,vmode]{block body}
-%  \justifying
-%}
-%
-%\setbeamertemplate{block end}
-%{
-%  \end{beamercolorbox}
-%  \vskip\smallskipamount
-%}
-%
-%% Alert block definition (with frame)
-%\setbeamertemplate{block alerted begin}
-%{
-%  \par\vskip\medskipamount
-%  \begin{beamercolorbox}[sep=0ex,rounded=true,center,dp={2ex}]{block alerted title}
-%    \vskip0.01cm
-%    \usebeamerfont{block title}\large\insertblocktitle
-%  \end{beamercolorbox}
-%  {\parskip0pt\par}
-%  \usebeamerfont{block body}
-%  \vskip-0.8cm
-%  \begin{beamercolorbox}[sep=0.5cm, rounded=true,center]{block alerted title}
-%  \setlength{\inboxwd}{\linewidth}
-%  \addtolength{\inboxwd}{-1cm}
-%  \begin{beamercolorbox}[rounded=true,wd={\inboxwd},center]{block alerted body}
-%  \setlength{\iinboxwd}{\inboxwd}
-%  \setlength{\inboxrule}{\inboxwd}
-%  \addtolength{\iinboxwd}{-0.5cm}
-%  \addtolength{\inboxrule}{0.5cm}
-%  \begin{center}
-%  \begin{minipage}{\iinboxwd}
-%  \justifying
-%}
-%
-%\setbeamertemplate{block alerted end}
-%{
-%  \end{minipage}
-%  \end{center}
-%  \end{beamercolorbox}
-%  \end{beamercolorbox}
-%  \vskip\smallskipamount
-%}
+% a "sub-block" (plain block-within-block (second-level header))
+\newenvironment{subblock}[1]{
+  \setbeamercolor{block title}{fg=MidnightBlue}
+  \setbeamerfont{block title}{size=\LARGE} % one tick smaller than \huge
+  \begin{block}{#1}
+}{\end{block}}
+
+% white space under blocks
+\addtobeamertemplate{block end}{}{\vspace*{2ex}}
+% alert block (which I'm using as abstract) - add some padding.
+% thanks  http://tex.stackexchange.com/a/109798/13049
+\addtobeamertemplate{block alerted begin}
+  {}
+  {% separates paragraphs in a block (also acts as top padding)
+   \setlength{\parskip}{1em plus 0.5em minus 0.5em}%
+   \begin{adjustwidth}{1em}{1em}
+}
+\addtobeamertemplate{block alerted end}
+  {\end{adjustwidth}%
+   \vspace{2ex plus 0.5ex minus 0.5ex}}% Pads bottom of block
+  {\vspace*{2ex}} % Seperates blocks from each other

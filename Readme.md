@@ -7,6 +7,23 @@ It compiles from R, but doesn't actually support the knitr yet (oops).
 
 The idea is that it will be much more standalone - remove the custom colour definitions, custom boxes (well check - they might look worse) and basically everything except the custom headline? (Maybe I don't even need that?) - you could just use your favourite beamer theme, right? The main thing I need to do is mod the font sizes. So perhaps reduce the number of files needed?
 
+TODO:
+
+* horizontal and portrait posters, with extra colour themes:
+  - CSIRO colours
+  - default is something prettier than this.
+* hierarchical? ie beamerthemebase, then an add-on for the orientation (or perhaps that's in the template not the theme), and colour themes for CSIRO/other.
+* pure tex versions (rather than markdown)
+* pure pandoc version (rather than *r*markdown)
+* presentations
+
+Separation of colour, font, inner, and outer themes: http://tex.stackexchange.com/questions/270112/designing-a-beamer-theme-from-scratch-what-to-put-in-inner-outer-color also Section 15.1 in beameruserguide.
+
+.... too much to do!
+* https://github.com/martinbjeldbak/ultimate-beamer-theme-list
+* https://cran.r-project.org/web/packages/viridis/vignettes/intro-to-viridis.html
+* quickstart to colour themes http://ramblingacademic.com/2015/12/how-to-quickly-overhaul-beamer-colors/
+
 ## YAML frontmatter
 
 ### Title, authors, institutions

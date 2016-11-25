@@ -34,19 +34,21 @@ header-includes:
     - '\usepackage{fancyvrb}'  # you get hyperref already
     - '\graphicspath{{images/}}'  # you get hyperref already
 # -- template config -- #
+# Examples of configuration
+# if you change enough of these though, maybe just change the sty file.
 beamerconfig:
-    blocks: # default rounded, no shadow.
+    blocks: # default rounded, no shadow. Do not recommend shadows.
         rounded: true
-        shadow: true
-    colours:
-    # (block|alerted|example) (body|title)
-      - name: block body
-        style: bg=white # ,fg=blue
-      # the horizontal rule between header and poster #@todo use
-      #  one of the theme colours.
-      - name: cboxb
-        style: bg=black
+#        shadow: true
+#    colours:
+#    # (block|alerted|example) (body|title)
+#      - name: block body
+#        style: bg=white 
+#      # the horizontal rule between header and poster
+#      - name: cboxb
+#        style: bg=black
 papersize: a0 # the default.
+orientation: landscape #@TODO
 columnwidth: '0.3\paperwidth' # the default is 0.3\textwidth and you get \colwid set to it.
 ---
 \DefineShortVerb{\`}
@@ -60,19 +62,14 @@ columnwidth: '0.3\paperwidth' # the default is 0.3\textwidth and you get \colwid
 % That is, put the \caption after the \includegraphics
 %-----------------------------------------------------------
 -->
-\begin{center}%
-  \begin{minipage}{.7\textwidth}%
-    \begin{exampleblock}{Summary}%
+\begin{columns}[t] % align top
+  \begin{column}{\colwid}
+    \begin{alertblock}{Summary}%
     Here is a barebones document for an A0 poster.
     It was based off http://www.nathanieljohnston.com/2009/08/latex-poster-template/ but has been modified to work as an R Markdown file to be compiled with knitr (rmd to md) and then pandoc (md to tex) and then latex (tex to pdf).
     
     This comes with its downsides (notably: that you can't use markdown within the blocks!!), but meh.
-    \end{exampleblock}%
-  \end{minipage}%
-\end{center}
-\vskip1in
-\begin{columns}[t] % align top
-  \begin{column}{\colwid}
+    \end{alertblock}%
     \begin{block}{The Setup}
       Required files:
       
