@@ -34,6 +34,11 @@
 %-----------------------------------------------------------
 % default for horizontal line
 \setbeamercolor{cboxb}{bg=black}
+\usebeamercolor{block title alerted}
+\setbeamercolor{block body alerted}{bg=block title alerted.fg!10}
+\setbeamercolor{block title alerted}{fg=white,bg=block title alerted.fg} % was gonna swap them (use 2 \setbeamercolor*) but it's black on red :/
+\setbeamercolor{cboxb}{bg=black}
+
 % set the fonts
 \setbeamerfont{section in head/foot}{series=\bfseries}
 \setbeamerfont{block title}{series=\bfseries,size=\huge} % headings.
@@ -78,7 +83,7 @@
 
 % a "sub-block" (plain block-within-block (second-level header))
 \newenvironment{subblock}[1]{
-  \setbeamercolor{block title}{fg=MidnightBlue}
+  \setbeamercolor{block title}{fg=block title.fg!80} % @TODO defer to beamercolortheme
   \setbeamerfont{block title}{size=\LARGE} % one tick smaller than \huge
   \begin{block}{#1}
 }{\end{block}}

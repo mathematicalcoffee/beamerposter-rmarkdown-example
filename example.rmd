@@ -55,7 +55,7 @@ columnwidth: '0.3\paperwidth' # the default is 0.3\textwidth and you get \colwid
 \nopandoc{\begin{columns}[t]} <!-- align top. If I use Begin, pandoc takes the [t] ... -->
 \Begin{column}{\colwid}
 <!--  --------------------- -->
-\Begin{alertblock}{Summary}%
+\Begin{alertblock}{Summary}
 Here is a barebones document for an A0 poster.
 It was based off http://www.nathanieljohnston.com/2009/08/latex-poster-template/ but has been modified to work as an R Markdown file to be compiled with knitr (rmd to md) and then pandoc (md to tex) and then latex (tex to pdf).
 
@@ -78,6 +78,13 @@ Also:
 
 I've only tested this compiling from Rstudio.
   You can set authors and affiliations in the YAML metadata, along with limited beamer styling (block rounded corners and so on).
+  
+\Begin{subblock}{Subblocks}
+These are essentially second-level headings. The environment is called `subblock`.
+The font size is slightly smaller. Set the heading colour via **TODO**.
+
+**TODO**: the spacing seems to have disappeared again.
+\End{subblock}
 \End{block}
 \End{column}
 <!--  --------------------- -->
@@ -91,7 +98,7 @@ You can make columns that span multiple other columns relatively easily. Lengths
 In particular, in the YAML:
 
 ~~~
-columnwidth: '0.3\paperwidth'
+  columnwidth: '0.3\paperwidth'
 ~~~
       
 You get `\colwid` for free, and using the `calc` package you can get multiples of it.
@@ -116,10 +123,9 @@ For the normal blocks it makes no sense to use a background colour other than wh
 <!--  --------------------- -->
 \Begin{block}{Todo}
 
-* the only crucial thing in the sty is the headline definition, right? Can that be moved to the poster-pandoc.sty?
+* verbatim straight quotes.
 * knitr...
 * bibliography
-* the font looks funny.
 * theming: user puts in a theme e.g. warsaw first for colours if they like
 * more control over font size
 * spacing between institutions seems too large
